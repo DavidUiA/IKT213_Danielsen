@@ -7,7 +7,7 @@ img = cv2.imread('../iris.jpg')
 def main():
     cv2.imwrite("padding.png", padding(img, 100))
     cv2.imwrite("resized.png", resize(img, 200, 200))
-    cv2.imwrite("cropped.png", crop(img, 200, 130, 200, 130))
+    cv2.imwrite("cropped.png", crop(img, 200, img.shape[1]-130, 200, img.shape[0]-130))
     cv2.imwrite("greyscale.png", greyscale(img))
     cv2.imwrite("hsv.png", hsv(img))
     cv2.imwrite("hue_shifted.png", hue_shifted(img, np.zeros_like(img), 50))
@@ -21,7 +21,7 @@ def padding(image, border_width):
 
 
 def crop(image, x0, x1, y0, y1):
-    return image[y0:image.shape[0] - y1, x0:image.shape[1] - x1]
+    return image[y0:y1, x0:x1]
 
 
 def resize(image, width, height):
